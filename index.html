@@ -4,33 +4,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>github</title>
+    <title>GitHubProfileExplorer</title>
     <script src="https://cdn.tailwindcss.com"></script>
 
 </head>
 
 <body>
- <!--  <div class="w-full flex flex-wrap justify-evenly text-white mt-7">
-        <div class="w-46 flex flex-col items-center mb-12">
-            <img id="" src="download.jpeg" alt="" class="w-44  h-44 rounded-3xl">
-            <p class="text-3xl font-bold text-white">600+</p>
-            <p class="name text-3xl font-bold text-gray-500">Different Course</p>
-        </div>
-        -->
 
 
 <div class="max-w-md mx-auto mt-4 bg-white p-8 rounded-md shadow-md">
+    
+    <a class="block text-gray-700 text-sm font-bold text-center mb-2 border border-2-solid" href="https://github.com/signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F&source=header-home ">Create GithubID</a>
     <div class="max-w-sm mx-auto bg-white shadow-md rounded-lg overflow-hidden my-4">
         <div class="flex items-center px-6 py-3 bg-gray-800">
-            <h1 class="mx-3 text-white font-semibold text-lg">Profile: <span id="login">Dushyantdas93 :<span id="code">14951415</span> </span></h1>
+            <h1 class="mx-3 text-white font-semibold text-lg"><span id="login">Username:</h1> <h1 class="mx-3 text-white font-semibold text-lg">Id:<span  id="code"></span></h1>
         </div>
-        <img id="image" class="w-full h-full object-cover" src="https://avatars.githubusercontent.com/u/149514159?v=4" alt="Profile Image">
+        <img id="image" class="w-full h-full object-cover" src="" alt="Profile Image">
         
         <div class="px-6 py-4">
-            <h1 id="nameOfUser" class="text-xl font-semibold text-gray-800">Dushyant Das Manikpuri</h1>
-            <p  class="py-2 text-gray-700">Followers: <span id="followers">1000</span></p>
-            <p  class="py-2 text-gray-700">Bio: <span id="bio">Web developer</span></p>
-            <p class="py-2 text-gray-700">City: <span id="city">Web developer</span></p>
+            <h1 id="nameOfUser" class="text-xl font-semibold text-gray-800 animate-fadeIn"></h1>
+            <p  class="py-2 text-gray-700">Followers: <span id="followers"></span></p>
+            <p  class="py-2 text-gray-700">Bio: <span id="bio"></span></p>
+            <p class="py-2 text-gray-700">City: <span id="city"></span></p>
         </div>
     </div>
     <form id="form">
@@ -41,8 +36,8 @@
         </div>
         <div class="mb-6 text-center">
             <button id="submit" type="submit"
-                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                Submit
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 ...">
+                Search
             </button>
         </div>
     </form>
@@ -51,50 +46,15 @@
     
 </body>
 <script>
-//     const form = document.querySelector("#form");
-    
-//     form.addEventListener('submit', (e)=>{
-//         e.preventDefault()
-//         // console.log(e.)
-//         let username = document.querySelector("#githubUsername")
-//         // username. = ''
-//         var githubusername = username.value
-//         // console.log(githubusername)
-//         // console.log(githubusername)
-        
-//         const requestUrl = `https://api.github.com/users/${githubusername}`
-    
-//     const xhr = new XMLHttpRequest();
-//     xhr.open('GET', requestUrl)
-//     xhr.onreadystatechange = function () {
-//         // console.log(xhr.readyState);
-//         if (xhr.readyState === 4) {
-//             const data = JSON.parse(this.responseText)
-//            if(data.status == 404){
-//             alert("Username not exist")
-//            }
-//            else{
-//             document.querySelector("#login").innerHTML = data.login
-//               document.querySelector("#followers").innerHTML = data.followers
-//                document.querySelector("#bio").innerHTML = data.bio?data.bio:"Web developer"
-            
-//            document.querySelector("#nameOfUser").innerHTML = data.name?data.name:data.login
-//          const image =   document.querySelector("#image")
-//          image.setAttribute('src', data.avatar_url)
-            
-//            }
-// username.value =''
-//         }
-//     }
-//     xhr.send();
-// })
+
     const fetchDataFromGithub = (defaltName) => {
        
         let username = document.querySelector("#githubUsername")
-     
+         
         var githubusername = !defaltName?username.value:defaltName;
        
         const requestUrl = `https://api.github.com/users/${githubusername}`
+        // const requestUrl = `https://api.github.com/users/dushyantdas93`
 
         const xhr = new XMLHttpRequest();
         xhr.open('GET', requestUrl)
@@ -108,9 +68,10 @@
                 else {
                     document.querySelector("#login").innerHTML = data.login? data.login : "Dushyant Das Manikpuri"
                     document.querySelector("#followers").innerHTML = data.followers? data.followers:0
+                    document.querySelector("#code").innerHTML = data.id ? data.id :0
+                
                     document.querySelector("#bio").innerHTML = data.bio ? data.bio : " You're not add bio"
                     document.querySelector("#city").innerHTML = data.location ? data.location : "You're not add city"
-
                     document.querySelector("#nameOfUser").innerHTML = data.name ? data.name : data.login
                     const image = document.querySelector("#image")
                     image.setAttribute('src', data.avatar_url)
@@ -120,9 +81,7 @@
             }
         }
         xhr.send();
-        
     }
-
    fetchDataFromGithub("dushyantdas93");
     const form = document.querySelector("#form");
 
@@ -130,10 +89,5 @@
                e.preventDefault();
                fetchDataFromGithub();
     } )
-
- 
-
-
-
 </script>
 </html>
